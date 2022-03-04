@@ -147,5 +147,29 @@ def main(
     print('Meta Test Accuracy', meta_test_accuracy / meta_batch_size)
 
 
+def parse_args():
+    import argparse
+
+    parser = argparse.ArgumentParser('Gradient-Based Meta-Learning Algorithms')
+    # experimental settings
+    parser.add_argument('--seed', type=int, default=42, help='Random seed.')
+    parser.add_argument('--cuda', type=bool, default=True, help='Cuda.')
+    # training settings
+    parser.add_argument('--iterations', type=int, default=60000, help='Number of iteration for meta train.') 
+    parser.add_argument('--adapsteps', type=int, default=1, help='Adaptation steps.') 
+    parser.add_argument('--batchsize', type=int, default=32, help='Meta batch size.')
+    # meta-learning settings
+    parser.add_argument('--shots', type=int, default=1, help='Number of support examples per class (k in "k-shot", default: 1).')
+    parser.add_argument('--ways', type=int, default=5, help='Number of classes per task (N in "N-way", default: 5).')
+    # algorithm settings
+    parser.add_argument('--metalr', type=float, default=0.003)
+    parser.add_argument('--fastlr', type=float, default=0.5)
+
+    args = parser.parse_args()
+
+    return args
+
+
 if __name__ == '__main__':
-    main()
+    args = parse_args()
+    main(ways=args.ways, shots=args.shots, meta_lr=args.metalr, fast_lr=args.fastlr, meta_batch_size=args.batchsize, adaptation_steps=args.adapsteps, num_iterations=args.iterations, cuda=args.cuda, seed=args.seed)
