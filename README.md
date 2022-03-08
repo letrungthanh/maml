@@ -192,3 +192,20 @@ You can also use the following Bibtex entry.
     * Jonas Rothfuss' [ProMP](https://github.com/jonasrothfuss/ProMP/)
     * Kwonjoon Lee's [MetaOptNet](https://github.com/kjunelee/MetaOptNet)
     * Han-Jia Ye's and Hexiang Hu's [FEAT](https://github.com/Sha-Lab/FEAT)
+
+### Notes for Conda
+
+~~~bash
+conda create -n aiml_pytorch1102gpu113lear2learn
+conda install -n aiml_pytorch1102gpu113lear2learn pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+conda activate aiml_pytorch1102gpu113lear2learn
+pip install learn2learn
+~~~
+
+### Commands
+~~~bash
+python examples/vision/maml_omniglot.py --ways=5 --shots=1 > omniglot_5_1.log 2>&1
+python examples/vision/maml_omniglot.py --ways=5 --shots=5 > omniglot_5_5.log 2>&1
+python examples/vision/maml_omniglot.py --ways=20 --shots=1 > omniglot_20_1.log 2>&1
+python examples/vision/maml_omniglot.py --ways=20 --shots=1 > omniglot_20_5.log 2>&1
+~~~
